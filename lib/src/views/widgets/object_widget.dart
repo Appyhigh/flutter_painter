@@ -218,16 +218,9 @@ class _ObjectWidgetState extends State<_ObjectWidget> {
                                               return Container(
                                                 decoration: BoxDecoration(
                                                     border: Border.all(
-                                                        color: Colors.white,
-                                                        width:
-                                                            selectedBorderWidth),
-                                                    boxShadow: [
-                                                      BorderBoxShadow(
                                                         color: Colors.black,
-                                                        blurRadius:
-                                                            selectedBlurRadius,
-                                                      )
-                                                    ]),
+                                                        width:
+                                                            selectedBorderWidth),),
                                               );
                                             },
                                           ),
@@ -1060,9 +1053,7 @@ class _ObjectControlBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData? theme = Theme.of(context);
-    if (theme == ThemeData.fallback()) theme = null;
-    final activeColor = this.activeColor ?? theme?.accentColor ?? Colors.blue;
+    const activeColor = Color(0xFF21A87D);
     return AnimatedContainer(
       duration: _ObjectWidgetState.controlsTransitionDuration,
       decoration: BoxDecoration(

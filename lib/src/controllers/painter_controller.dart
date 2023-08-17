@@ -288,7 +288,7 @@ class PainterController extends ValueNotifier<PainterControllerValue> {
   ///   });
   /// }
   /// ```
-  void addImage(ui.Image image, [Size? size]) {
+  Drawable addImage(ui.Image image, [Size? size]) {
     // Calculate the center of the painter
     final renderBox =
         painterKey.currentContext?.findRenderObject() as RenderBox?;
@@ -309,18 +309,19 @@ class PainterController extends ValueNotifier<PainterControllerValue> {
     }
 
     addDrawables([drawable]);
+    return drawable;
   }
 
   /// Renders the background and all other drawables to a [ui.Image] object.
   ///
   /// The size of the output image is controlled by [size].
   /// All drawables will be scaled according to that image size.
-  Future<ui.Image> renderImage(Size size) async {
+  Future<ui.Image> renderImage(Size canvasSize, Size size) async {
     final recorder = ui.PictureRecorder();
     final canvas = Canvas(recorder);
     final painter = Painter(
       drawables: value.drawables,
-      scale: painterKey.currentContext?.size ?? size,
+      scale: painterKey.currentContext?.size ?? canvasSize,
       background: value.background,
     );
     painter.paint(canvas, size);
